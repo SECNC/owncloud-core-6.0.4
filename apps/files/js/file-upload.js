@@ -70,7 +70,7 @@ OC.Upload = {
 	 */
 	isProcessing:function() {
 		var count = 0;
-
+		
 		jQuery.each(this._uploads,function(i, data) {
 			if (data.state() === 'pending') {
 				count++;
@@ -165,12 +165,37 @@ OC.Upload = {
 	checkExistingFiles: function (selection, callbacks) {
 		// TODO check filelist before uploading and show dialog on conflicts, use callbacks
 		callbacks.onNoConflicts(selection);
+	},
+	showMask: function() {
+		// in case one was shown before
+		var $mask = $('#content .mask');
+		if ($mask.exists()) {
+			return;
+		}
+
+		$mask = $('<div class="mask transparent"></div>');
+
+		$mask.css('background-image', 'url('+ OC.imagePath('core', 'loading.gif') + ')');
+		$mask.css('background-repeat', 'no-repeat');
+		$('#content').append($mask);
+
+		// block UI, but only make visible in case loading takes longer
+		OC.Upload._maskTimeout = window.setTimeout(function() {
+			// reset opacity
+			$mask.removeClass('transparent');
+		}, 250);
+	},
+	hideMask: function() {
+		var $mask = $('#content .mask').remove();
+		if (OC.Upload._maskTimeout) {
+			window.clearTimeout(OC.Upload._maskTimeout);
+		}
 	}
 };
 
 $(document).ready(function() {
 
-	if ( $('#file_upload_start').exists()&& $('#file_upload_start').is(':visible') ) {
+	if ( $('#file_upload_start').exists() ) {
 
 		var file_upload_param = {
 			dropZone: $('#content'), // restrict dropZone to content div
@@ -196,13 +221,13 @@ $(document).ready(function() {
 			add: function(e, data) {
 				OC.Upload.log('add', e, data);
 				var that = $(this);
-
+			
 				// we need to collect all data upload objects before starting the upload so we can check their existence
 				// and set individual conflict actions. unfortunately there is only one variable that we can use to identify
 				// the selection a data upload is part of, so we have to collect them in data.originalFiles
 				// turning singleFileUploads off is not an option because we want to gracefully handle server errors like
 				// already exists
-
+			
 				// create a container where we can store the data objects
 				if ( ! data.originalFiles.selection ) {
 					// initialize selection and remember number of files to upload
@@ -213,40 +238,40 @@ $(document).ready(function() {
 					};
 				}
 				var selection = data.originalFiles.selection;
-
+			
 				// add uploads
 				if ( selection.uploads.length < selection.filesToUpload ) {
 					// remember upload
 					selection.uploads.push(data);
 				}
-
+			
 				//examine file
 				var file = data.files[0];
 				try {
 					// FIXME: not so elegant... need to refactor that method to return a value
-					Files.isFileNameValid(file.name, FileList.getCurrentDirectory());
+					Files.isFileNameValid(file.name);
 				}
 				catch (errorMessage) {
 					data.textStatus = 'invalidcharacters';
 					data.errorThrown = errorMessage;
 				}
-
+			
 				if (file.type === '' && file.size === 4096) {
 					data.textStatus = 'dirorzero';
 					data.errorThrown = t('files', 'Unable to upload {filename} as it is a directory or has 0 bytes',
 						{filename: file.name}
 					);
 				}
-
+			
 				// add size
 				selection.totalBytes += file.size;
-
+			
 				//check max upload size
 				if (selection.totalBytes > $('#max_upload').val()) {
 					data.textStatus = 'notenoughspace';
 					data.errorThrown = t('files', 'Not enough space available');
 				}
-
+			
 				// end upload for whole selection on error
 				if (data.errorThrown) {
 					// trigger fileupload fail
@@ -257,12 +282,12 @@ $(document).ready(function() {
 
 				// check existing files when all is collected
 				if ( selection.uploads.length >= selection.filesToUpload ) {
-
+				
 					//remove our selection hack:
 					delete data.originalFiles.selection;
 
 					var callbacks = {
-
+					
 						onNoConflicts: function (selection) {
 							$.each(selection.uploads, function(i, upload) {
 								upload.submit();
@@ -285,7 +310,7 @@ $(document).ready(function() {
 					};
 
 					OC.Upload.checkExistingFiles(selection, callbacks);
-
+				
 				}
 
 				return true; // continue adding files
@@ -296,6 +321,7 @@ $(document).ready(function() {
 			 */
 			start: function(e) {
 				OC.Upload.log('start', e, null);
+				OC.Upload.showMask();
 			},
 			submit: function(e, data) {
 				OC.Upload.rememberUpload(data);
@@ -322,6 +348,7 @@ $(document).ready(function() {
 					}, 10000);
 				}
 				OC.Upload.deleteUpload(data);
+				OC.Upload.hideMask();
 			},
 			/**
 			 * called for every successful upload
@@ -365,6 +392,7 @@ $(document).ready(function() {
 					var fu = $(this).data('blueimp-fileupload') || $(this).data('fileupload');
 					fu._trigger('fail', e, data);
 				}
+				OC.Upload.hideMask();
 			},
 			/**
 			 * called after last upload
@@ -408,7 +436,7 @@ $(document).ready(function() {
 			});
 			fileupload.on('fileuploadstop', function(e, data) {
 				OC.Upload.log('progress handle fileuploadstop', e, data);
-
+				
 				$('#uploadprogresswrapper input.stop').fadeOut();
 				$('#uploadprogressbar').fadeOut();
 			    Files.updateStorageStatistics();
@@ -500,7 +528,7 @@ $(document).ready(function() {
 		if ($(this).children('p').length === 0) {
 			return;
 		}
-
+		
 		$('#new .error').tipsy('hide');
 
 		$('#new li').each(function(i,element) {
@@ -514,7 +542,7 @@ $(document).ready(function() {
 		var text=$(this).children('p').text();
 		$(this).data('text',text);
 		$(this).children('p').remove();
-
+		
 		// add input field
 		var form = $('<form></form>');
 		var input = $('<input type="text">');
@@ -531,7 +559,7 @@ $(document).ready(function() {
 				throw t('files', 'URL cannot be empty');
 			} else if (type !== 'web' && !Files.isFileNameValid(filename)) {
 				// Files.isFileNameValid(filename) throws an exception itself
-			} else if (FileList.getCurrentDirectory() === '/' && filename.toLowerCase() === 'shared') {
+			} else if ($('#dir').val() === '/' && filename === 'Shared') {
 				throw t('files', 'In the home folder \'Shared\' is a reserved filename');
 			} else if (FileList.inList(filename)) {
 				throw t('files', '{new_name} already exists', {new_name: filename});
@@ -565,6 +593,7 @@ $(document).ready(function() {
 			event.stopPropagation();
 			event.preventDefault();
 			try {
+				OC.Upload.showMask();
 				checkInput();
 				var newname = input.val();
 				if (FileList.lastAction) {
@@ -602,6 +631,7 @@ $(document).ready(function() {
 								} else {
 									OC.dialogs.alert(result.data.message, t('core', 'Could not create file'));
 								}
+								OC.Upload.hideMask();
 							}
 						);
 						break;
@@ -618,6 +648,7 @@ $(document).ready(function() {
 								} else {
 									OC.dialogs.alert(result.data.message, t('core', 'Could not create folder'));
 								}
+								OC.Upload.hideMask();
 							}
 						);
 						break;
@@ -663,10 +694,12 @@ $(document).ready(function() {
 								tr.find('td.filename').attr('style', 'background-image:url('+previewpath+')');
 							}, null, null, data.etag);
 							FileActions.display(tr.find('td.filename'), true);
+							OC.Upload.hideMask();
 						});
 						eventSource.listen('error',function(error) {
 							$('#uploadprogressbar').fadeOut();
 							alert(error);
+							OC.Upload.hideMask();
 						});
 						break;
 				}
@@ -682,6 +715,7 @@ $(document).ready(function() {
 				input.tipsy({gravity: 'w', trigger: 'manual'});
 				input.tipsy('show');
 				input.addClass('error');
+				OC.Upload.hideMask();
 			}
 		});
 	});
