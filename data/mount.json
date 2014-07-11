@@ -1,0 +1,1 @@
+{"user":{"all":{"\/$user\/files\/owncloud":{"class":"\\OC\\Files\\Storage\\Swift","options":{"user":"gtuser","bucket":"owncloud","region":"RegionOne","key":"123","tenant":"gttenant","password":"gtpwd","service_name":"swift","url":"https:\/\/gt-cnc2.pop-pa.rnp.br:5000\/v2.0","timeout":"20"}}}}}
