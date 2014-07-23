@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '\..\swiftAccess\action\authentication\ConnectionContext.inc';
-require_once '\..\swiftAccess\action\authentication\KeystoneConnection.inc';
-require_once '\..\swiftAccess\ResourceToolkit.inc';
-require_once __DIR__ . '\..\swiftAccess\action\Cotas.inc';
+require_once __DIR__ . '/../swiftAccess/action/authentication/ConnectionContext.inc';
+require_once '/../swiftAccess/action/authentication/KeystoneConnection.inc';
+require_once '/../swiftAccess/ResourceToolkit.inc';
+require_once __DIR__ . '/../swiftAccess/action/Cotas.inc';
 
 OCP\User::checkAdminUser();
 OCP\JSON::callCheck();
