@@ -1,6 +1,6 @@
 <?php
 	
-	require_once '/../../connection/HttpConnection.inc';
+	require_once __DIR__ . '/../../connection/HttpConnection.inc';
 	require_once 'IConnectionStrategy.inc';
 
 	class KeystoneConnection implements IConnectionStrategy {
