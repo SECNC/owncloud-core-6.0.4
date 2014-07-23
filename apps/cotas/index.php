@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '\swiftAccess\action\Cotas.inc';
+require_once __DIR__ . '/swiftAccess/action/Cotas.inc';
 
 // Checa se o usuário está Logado
 OCP\User::checkLoggedIn();

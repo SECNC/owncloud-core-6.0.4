@@ -32,7 +32,8 @@ function printDescription(){
 		if(strcasecmp($usuariojson,$user) == 0) {
 			$tenants = array_keys($info[user][$user]);
 			foreach ($tenants as $tenant){
-				$nomeexibicao = split('/',$tenant)[3];
+				$buff = split('/',$tenant);
+				$nomeexibicao = $buff[3];
 				if(strcasecmp($info[user][$user][$tenant]['class'],'\OC\Files\Storage\Swift') == 0) {
 					printProgressBar($nomeexibicao,$user,$info['user'][$user][$tenant]['options']['tenant'],0);
 					printDescription();
@@ -41,7 +42,8 @@ function printDescription(){
 		}elseif(strcasecmp($usuariojson,'all') == 0) {
 			$tenants = array_keys($info[user]['all']);
 			foreach ($tenants as $tenant){
-				$nomeexibicao = split('/',$tenant)[3];
+				$buff = split('/',$tenant);
+				$nomeexibicao = $buff[3];
 				if(strcasecmp($info[user]['all'][$tenant]['class'],'\OC\Files\Storage\Swift') == 0) {
 					printProgressBar($nomeexibicao,$user,$info['user']['all'][$tenant]['options']['tenant'],0);
 					printDescription();
@@ -60,7 +62,8 @@ function printDescription(){
 			if(strcasecmp($groupjson,$valor['gid']) == 0) {
 				$tenants = array_keys($info[group][$valor['gid']]);
 				foreach ($tenants as $tenant){
-					$nomeexibicao = split('/',$tenant)[3];
+					$buff = split('/',$tenant);
+					$nomeexibicao = $buff[3];
 					if(strcasecmp($info[group][$valor['gid']][$tenant]['class'],'\OC\Files\Storage\Swift') == 0) {
 						printProgressBar($nomeexibicao,$valor['gid'],$info['group'][$valor['gid']][$tenant]['options']['tenant'],1);
 						printDescription();
