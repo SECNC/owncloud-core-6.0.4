@@ -1,8 +1,8 @@
 <?php
 
-require_once '\..\resource/SContainer.inc';
-require_once '\..\connection/HttpConnection.inc';
-require_once '\..\ResourceToolkit.inc';
+require_once '/../resource/SContainer.inc';
+require_once '/../connection/HttpConnection.inc';
+require_once '/../ResourceToolkit.inc';
 
 /**
  * ContainerAction implements all the action that can be done in a container. 
