@@ -54,7 +54,7 @@ function getTenantInfos($user,$passwd,$nometenant,$endereco){
 		$httpConnection = new HttpConnection();
 		$httpConnection->addHttpMethodRequest("GET");
 		$httpConnection->addNewHeader("X-Auth-Token", $cc->getToken());
-		$response = $httpConnection->getResponse($cc->getStorageURL() . '/owncloud');//'$swiftURL);
+		$response = $httpConnection->getResponse($cc->getStorageURL() . '/' . $user);//'$swiftURL);
 		
 		$headers = $httpConnection->getResponseHeaders('X-Container-Meta-Quota-Bytes');
 		
