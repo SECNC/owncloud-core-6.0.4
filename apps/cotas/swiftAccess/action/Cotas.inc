@@ -1,7 +1,31 @@
 <?php
+set_include_path(
+	get_include_path() . PATH_SEPARATOR .
+	\OC_App::getAppPath('files_external') . '/3rdparty/phpseclib/phpseclib'
+);
+
+	function decryptPassword($encryptedPassword) {
+		
+		$cipher = getCipher();
+		$binaryPassword = base64_decode($encryptedPassword);
+		$iv = substr($binaryPassword, 0, 16);
+		$cipher->setIV($iv);
+		$binaryPassword = substr($binaryPassword, 16);
+		return  $cipher->decrypt($binaryPassword);
+	}
+
+
+ function getCipher() {
+		if (!class_exists('Crypt_AES', false)) {
+			include('Crypt/AES.php');
+		}
+		$cipher = new Crypt_AES(CRYPT_AES_MODE_CBC);
+		$cipher->setKey(\OCP\Config::getSystemValue('passwordsalt'));
+		return $cipher;
+	}
 
 function getTenantInfos($user,$passwd,$nometenant,$endereco){
-	//$tenant->nome = $tenant;
+	$passwd =  decryptPassword($passwd);
 	$cc = new ConnectionContext();
 	$connection = new KeystoneConnection();
 	$cc->setConnectionContext($connection);
@@ -10,19 +34,19 @@ function getTenantInfos($user,$passwd,$nometenant,$endereco){
 	// Para url mal formadas, revome-se o aviso de erro na hora de abrir uma conexao
 	@$cc->realizeAutentication();
 	if ($cc->getResponseNumber() == 401 ) {
-		//echo '$errorManager->setErroMessage("Credencias Inválidas. ".$cc->getResponseNumber(), null);';
+		echo '$errorManager->setErroMessage("Credencias Inválidas. ".$cc->getResponseNumber(), null);';
 		return null;
 	} elseif ($cc->getResponseNumber() == 400 || $cc->getResponseNumber() == 404){
-		//echo '$errorManager->setErroMessage("Não foi possivel realizar o login. Codigo do erro: ". $cc->getResponseNumber(). ", tente logar com outro módulo de autenticacao", null);';
+		echo '$errorManager->setErroMessage("Não foi possivel realizar o login. Codigo do erro: ". $cc->getResponseNumber(). ", tente logar com outro módulo de autenticacao", null);';
 		return null;	
 	} elseif ($cc->getResponseNumber() >= 300 && $cc->getResponseNumber() <= 500) {
-		//echo '$errorManager->setErroMessage("Não foi possivel realizar o login. Codigo do erro: ". $cc->getResponseNumber(), null);';
+		echo '$errorManager->setErroMessage("Não foi possivel realizar o login. Codigo do erro: ". $cc->getResponseNumber(), null);';
 		return null;	
 	} elseif ($cc->getResponseNumber() >= 200 && $cc->getResponseNumber() < 300) {
 			
-		//echo "Token: " . $cc->getToken() . '</br>';
-		//echo "Storage URL: " . $cc->getStorageURL() . '</br>';	
-		//echo "Debug:" . $cc->getDebug();		
+	//	echo "Token: " . $cc->getToken() . '</br>';
+	//	echo "Storage URL: " . $cc->getStorageURL() . '</br>';	
+	//	echo "Debug:" . $cc->getDebug();		
 		$tenant = new Tenant();
 		
 		
@@ -65,7 +89,7 @@ function getTenantInfos($user,$passwd,$nometenant,$endereco){
 		}
 		return $tenant;
 	} else {
-		//echo '$errorManager->setErroMessage("Não foi possivel realizar o login. Verifique se a URL de autenticacao esta correta.", null);';
+		echo '$errorManager->setErroMessage("Não foi possivel realizar o login. Verifique se a URL de autenticacao esta correta.", null);';
 		return null;
 	}
 }
@@ -81,29 +105,27 @@ class Tenant{
 	public $bytesUsed = 0;
 } 
 function readData($isPersonal) {
-
-$parser = new \OC\ArrayParser();
-if ($isPersonal) {
-	$phpFile = OC_User::getHome(OCP\User::getUser()).'/mount.php';
-	$jsonFile = OC_User::getHome(OCP\User::getUser()).'/mount.json';
-} else {
-	$phpFile = OC::$SERVERROOT.'/config/mount.php';
-	$datadir = \OC_Config::getValue('datadirectory', \OC::$SERVERROOT . '/data/');
-	$jsonFile = \OC_Config::getValue('mount_file', $datadir . '/mount.json');
-}
-if (is_file($jsonFile)) {
-	$mountPoints = json_decode(file_get_contents($jsonFile), true);
-	if (is_array($mountPoints)) {
-		return $mountPoints;
+		$parser = new \OC\ArrayParser();
+		if ($isPersonal) {
+			$phpFile = OC_User::getHome(OCP\User::getUser()).'/mount.php';
+			$jsonFile = OC_User::getHome(OCP\User::getUser()).'/mount.json';
+		} else {
+			$datadir = \OC_Config::getValue("datadirectory", \OC::$SERVERROOT . "/data");
+			$phpFile = OC::$SERVERROOT.'/config/mount.php';
+			$jsonFile = $datadir . '/mount.json';
+		}
+		if (is_file($jsonFile)) {
+			$mountPoints = json_decode(file_get_contents($jsonFile), true);
+			if (is_array($mountPoints)) {
+				return $mountPoints;
+			}
+		} elseif (is_file($phpFile)) {
+			$mountPoints = $parser->parsePHP(file_get_contents($phpFile));
+			if (is_array($mountPoints)) {
+				return $mountPoints;
+			}
+		}
+		return array();
 	}
-} elseif (is_file($phpFile)) {
-	$mountPoints = $parser->parsePHP(file_get_contents($phpFile));
-	if (is_array($mountPoints)) {
-		return $mountPoints;
-	}
-}
-return array();
-}
-
 
 ?>

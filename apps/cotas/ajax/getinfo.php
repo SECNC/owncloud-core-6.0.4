@@ -13,12 +13,12 @@ $tenant = $_POST['tenant'];
 $user = $_POST['user']; 
 $tipo = $_POST['tipo'];
 $info = readData(false);
-	
+
 if($tipo == 0){
-	$tenantaws = getTenantInfos($info[user][$user]['/$user/files/' . $tenant]['options']['tenant'],$info[user][$user]['/$user/files/' . $tenant]['options']['password'],$info[user][$user]['/$user/files/' . $tenant]['options']['user'],$info[user][$user]['/$user/files/' . $tenant]['options']['url'] . 'tokens');
+	$tenantaws = getTenantInfos($info['user'][$user]['/$user/files/' . $tenant]['options']['tenant'],$info['user'][$user]['/$user/files/' . $tenant]['options']['password_encrypted'],$info['user'][$user]['/$user/files/' . $tenant]['options']['user'],$info['user'][$user]['/$user/files/' . $tenant]['options']['url'] . '/tokens');
 }
 else{
-	$tenantaws = getTenantInfos($info[group][$user]['/$user/files/' . $tenant]['options']['tenant'],$info[group][$user]['/$user/files/' . $tenant]['options']['password'],$info[group][$user]['/$user/files/' . $tenant]['options']['user'],$info[group][$user]['/$user/files/' . $tenant]['options']['url'] . 'tokens');
+	$tenantaws = getTenantInfos($info['group'][$user]['/$user/files/' . $tenant]['options']['tenant'],$info['group'][$user]['/$user/files/' . $tenant]['options']['password_encrypted'],$info['group'][$user]['/$user/files/' . $tenant]['options']['user'],$info['group'][$user]['/$user/files/' . $tenant]['options']['url'] . '/tokens');
 }
 
 echo json_encode($tenantaws);
