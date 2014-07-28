@@ -1,5 +1,5 @@
-Welcome to your ownCloud account!
+Bem vindo ao ownCloud!
 
-This is just an example file for developers and git users. 
-The packaged and released versions will come with better examples.
+Obrigado por participar do Serviço Experimental Computação em Nuvem para Ciência (SE-CNC).
 
+Caso não consiga visualizar nenhuma de suas pastas, pedimos que aguarde um pouco e tente novamente. Caso o problema persista, favor contatar a equipe do SE-CNC.
