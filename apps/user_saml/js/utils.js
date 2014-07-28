@@ -7,13 +7,13 @@
 
 $(document).ready(function(){
 
-	var loginMsg = t('user_saml', 'Login with SAML');
+	var loginMsg = t('user_saml', 'Login com Federação');
 
     $('<div id="login-saml"></div>').css({
 		'text-align': 'center',
     }).appendTo('form');
 
-	$('<p>Ou </p>').css(
+	$('<p>Ou</p>').css(
 	{
 		'text-align': 'center',
         'font-weight': 'bolder',
@@ -56,7 +56,7 @@ $(document).ready(function(){
     }).appendTo('#login-saml');
 
 
-	$('<img id="login-saml-img" src="' + OC.imagePath('user_saml', 'logo.jpg') + '" title="'+ loginMsg +'" alt="'+ loginMsg +'" />').css(
+	$('<img id="login-saml-img" src="' + OC.imagePath('user_saml', 'logo.png') + '" title="'+ loginMsg +'" alt="'+ loginMsg +'" />').css(
 	{
 		cursor : 'pointer',
         border : '1px solid #777'
