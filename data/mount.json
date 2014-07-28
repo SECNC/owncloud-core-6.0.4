@@ -1,1 +1,0 @@
-{"group":{"admin":{"\/$user\/files\/thomas":{"class":"\\OC\\Files\\Storage\\Swift","options":{"user":"owncloud","bucket":"thomas","region":"RegionOne","key":"123","tenant":"thomas","password":"","service_name":"swift","url":"https:\/\/gt-cnc2.pop-pa.rnp.br:5000\/v2.0","timeout":"20","password_encrypted":"OGE4YTg2ODA2OGM3NGZhNXY9nMf89qvJ2KpBuUFgl2CQsi9XeabYGmQj6Csfj8iA"}}}}}
