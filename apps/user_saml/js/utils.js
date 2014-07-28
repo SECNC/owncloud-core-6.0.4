@@ -13,7 +13,7 @@ $(document).ready(function(){
 		'text-align': 'center',
     }).appendTo('form');
 
-	$('<p>or</p>').css(
+	$('<p>Ou </p>').css(
 	{
 		'text-align': 'center',
         'font-weight': 'bolder',
@@ -42,7 +42,7 @@ $(document).ready(function(){
         }
     });
 
-	$('<p>Access using SAML authentication</p>').css(
+	$('<p>acesse pela federação:</p>').css(
 	{
 		'text-align': 'center',
         'font-weight': 'bolder',
