@@ -74,7 +74,7 @@ class OC_USER_SAML_Hooks {
 				}
 
 				if (!OC_User::userExists($uid)) {
-					if (preg_match( '/[^a-zA-Z0-9 _\.@\-]/', $uid)) {
+					/*if (preg_match( '/[^a-zA-Z0-9 _\.@\-]/', $uid)) {
 						OC_Log::write('saml','Invalid username "'.$uid.'", allowed chars "a-zA-Z0-9" and "_.@-" ',OC_Log::DEBUG);
 						return false;
 					}
@@ -94,7 +94,7 @@ class OC_USER_SAML_Hooks {
 								update_display_name($uid, $saml_display_name);
 							}
 						}
-					}
+					}*/
 				}
 				else {
 					if ($samlBackend->updateUserData) {
@@ -170,7 +170,4 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 function update_display_name($uid, $displayName) {
 			$query = OC_DB::prepare('UPDATE `*PREFIX*users` SET `displayname` = ? WHERE LOWER(`uid`) = ?');
 			$query->execute(array($displayName, $uid));
-
-//						die();
-	//OC_User::setDisplayName($uid, $displayName);
 }
