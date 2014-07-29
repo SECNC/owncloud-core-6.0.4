@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+	<id>gerencia_cotas</id>
+	<name>gerencia_cotas</name>
+	<description>App para gerenciamento de cotas de usuários associados ao openstack swift com o Files External</description>
+	<version>1.0</version>
+	<licence>AGPL</licence>
+	<author>André Luís Castro de Felippe - GT-CNC</author>
+	<require>4</require>
+</info>
