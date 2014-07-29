@@ -106,10 +106,9 @@ class OC_USER_SAML_Hooks {
 						if (isset($saml_groups)) {
 							update_groups($uid, $saml_groups, $samlBackend->protectedGroups, false);
 						}
-						echo '--->' . $saml_display_name;
-							die();
 							
 						if (isset($saml_display_name)) {
+						
 							update_display_name($uid, $saml_display_name);
 						}
 					}
@@ -171,6 +170,9 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 }
 
 function update_display_name($uid, $displayName) {
+	echo 'Atualizando -->' . $saml_display_name .'</br>';
+						
 	OC_Log::write('saml','Atualizado displayName "'.$uid.'" para "'.$displayName.'"', OC_Log::DEBUG);
-	OC_User::setDisplayName($uid, $displayName);
+	echo OC_User::setDisplayName($uid, $displayName);
+	die();
 }
