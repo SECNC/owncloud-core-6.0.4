@@ -95,6 +95,7 @@ class OC_USER_SAML_Hooks {
 							}
 						}
 					}*/
+					echo "<script>alert(\"Você Não está autorizado para acesso ao ownCloud\")</script>";
 				}
 				else {
 					if ($samlBackend->updateUserData) {
