@@ -168,7 +168,6 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 }
 
 function update_display_name($uid, $displayName) {
-	echo $uid . '----' . $displayName;
-	die();
+	
 	OC_User::setDisplayName($uid, $displayName);
 }
