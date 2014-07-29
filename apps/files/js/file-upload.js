@@ -182,7 +182,7 @@ OC.Upload = {
 		// block UI, but only make visible in case loading takes longer
 		OC.Upload._maskTimeout = window.setTimeout(function() {
 			// reset opacity
-			$mask.removeClass('transparent');
+			$mask.removeClass('mask transparent');
 		}, 250);
 	},
 	hideMask: function() {
