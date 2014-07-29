@@ -100,6 +100,7 @@ class OC_USER_SAML_Hooks {
 					if ($samlBackend->updateUserData) {
 						OC_Util::setupFS($uid);
 						OC_Log::write('saml','Updating data of the user: '.$uid,OC_Log::DEBUG);
+						OC_Util::setupFS($uid);
 						if(isset($saml_email)) {
 							update_mail($uid, $saml_email);
 						}
@@ -168,6 +169,6 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 }
 
 function update_display_name($uid, $displayName) {
-	
+
 	OC_User::setDisplayName($uid, $displayName);
 }
