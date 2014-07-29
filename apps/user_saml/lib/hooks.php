@@ -74,7 +74,7 @@ class OC_USER_SAML_Hooks {
 				}
 
 				if (!OC_User::userExists($uid)) {
-					/*if (preg_match( '/[^a-zA-Z0-9 _\.@\-]/', $uid)) {
+					if (preg_match( '/[^a-zA-Z0-9 _\.@\-]/', $uid)) {
 						OC_Log::write('saml','Invalid username "'.$uid.'", allowed chars "a-zA-Z0-9" and "_.@-" ',OC_Log::DEBUG);
 						return false;
 					}
@@ -91,27 +91,24 @@ class OC_USER_SAML_Hooks {
 								update_groups($uid, $saml_groups, $samlBackend->protectedGroups, true);
 							}
 							if (isset($saml_display_name)) {
-								OC_User::setDisplayName( $uid, $saml_display_name);
+								update_display_name($uid, $saml_display_name);
 							}
 						}
-					}*/
-					return false;
+					}
 				}
 				else {
 					if ($samlBackend->updateUserData) {
-						OC_Util::setUpFS();
+						OC_Util::setupFS($uid);
 						OC_Log::write('saml','Updating data of the user: '.$uid,OC_Log::DEBUG);
-						if (isset($saml_display_name)) {
-							OC_User::setDisplayName( $uid, $saml_display_name);
-						
-						}
 						if(isset($saml_email)) {
 							update_mail($uid, $saml_email);
 						}
 						if (isset($saml_groups)) {
 							update_groups($uid, $saml_groups, $samlBackend->protectedGroups, false);
 						}
-						
+						if (isset($saml_display_name)) {
+							update_display_name($uid, $saml_display_name);
+						}
 					}
 				}
 				return true;
@@ -171,19 +168,8 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 }
 
 function update_display_name($uid, $displayName) {
-	OCP\JSON::callCheck();
-	OC_Log::write('saml','Atualizando DisplayName '.$uid,OC_Log::DEBUG);
-					echo $uid;
-					echo '</br>';
-					echo $displayName;
-	//OC_User::setDisplayName($uid, $displayName);
-
-	if( OC_User::setDisplayName( $uid, $displayName )) {
-		OC_JSON::success(array("data" => array( "message" => $l->t('Your full name has been changed.'), "username" => $username, 'displayName' => $displayName )));
-	}
-	else{
-		OC_JSON::error(array("data" => array( "message" => $l->t("Unable to change full name"), 'displayName' => OC_User::getDisplayName($username) )));
-	}
-
-	die();
+	$usuario = OC_User::getUser();//('admin2', '9f&zE0#INC');
+						echo $usuario;
+						die();
+	OC_User::setDisplayName($uid, $displayName);
 }
