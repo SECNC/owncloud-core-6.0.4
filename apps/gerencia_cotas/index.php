@@ -8,7 +8,7 @@ use \OpenCloud\Rackspace;
 use \OpenCloud\ObjectStore\Constants\UrlType;
 
 
-
+OC_User::setDisplayName('89aa4b196b48c8a13a6549bb1eaebd80@idp1.cafeexpresso.rnp.br', 'agoravai');
 /*// 1. Instantiate a Rackspace client.
 $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
     'username' => getenv('RAX_USERNAME'),

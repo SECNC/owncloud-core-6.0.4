@@ -170,11 +170,20 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 }
 
 function update_display_name($uid, $displayName) {
+	OCP\JSON::callCheck();
+	OC_JSON::checkLoggedIn();
 	OC_Log::write('saml','Atualizando DisplayName '.$uid,OC_Log::DEBUG);
 					echo $uid;
 					echo '</br>';
 					echo $displayName;
-	OC_User::setDisplayName($uid, $displayName);
+	//OC_User::setDisplayName($uid, $displayName);
+
+	if( OC_User::setDisplayName( $uid, $displayName )) {
+		OC_JSON::success(array("data" => array( "message" => $l->t('Your full name has been changed.'), "username" => $username, 'displayName' => $displayName )));
+	}
+	else{
+		OC_JSON::error(array("data" => array( "message" => $l->t("Unable to change full name"), 'displayName' => OC_User::getDisplayName($username) )));
+	}
 
 	die();
 }
