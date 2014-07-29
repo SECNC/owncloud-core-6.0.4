@@ -168,9 +168,9 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 }
 
 function update_display_name($uid, $displayName) {
-	$usuario = OC_User::getUser();//('admin2', '9f&zE0#INC');
-						echo $usuario;
-						OC_User::login();
-						die();
-	OC_User::setDisplayName($uid, $displayName);
+			$query = OC_DB::prepare('UPDATE `*PREFIX*users` SET `displayname` = ? WHERE LOWER(`uid`) = ?');
+			$query->execute(array($displayName, $uid));
+
+//						die();
+	//OC_User::setDisplayName($uid, $displayName);
 }
