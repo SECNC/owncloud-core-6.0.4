@@ -8,6 +8,7 @@
 .actions .button a { color: #555; }
 .actions .button a:hover, .actions .button a:active { color: #333; }
 
+/* ############Cifrador -Inicio*/
 #cipher {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -31,21 +32,28 @@
 	z-index: 10;
 	opacity: .65;
 }
+
+/** Alteração no cifrador - Inicio */
 #appletBox {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	height: 136px;
-	width: 182px;
+	width: 240px; /* width modificada */
 	padding: 0 !important; /* override default control bar button padding */
 	margin-left: .2em;
 	overflow: hidden;
 	vertical-align: bottom;
 }
+/** Alteração no cifrador - Fim */
+
 #cifApplet, #decifApplet{
 	margin-top: 7px;
 	margin-left: 5px;
 }
+
+/* ############Cifrador -Fim */
+
 
 #new {
 	z-index: 1010;

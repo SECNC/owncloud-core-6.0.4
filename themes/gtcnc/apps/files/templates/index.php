@@ -15,26 +15,34 @@
 			</div>
 			<?php endif;?>
 			
+<!-- ###################### Cifrador- Inicio -->
+			
 			<div id="cipher" class="button">
 					<a href="#" class="svg icon icon-cipher"></a>
 			</div>
+			
 			<div id="appletBox" style="display: none;" class="button">
-				<object width="80px"
+				
+				<object width="100px"
 					    height="20px"
 					    type="application/x-java-applet"
 					    id="cifApplet"
 					    code="br.rnp.sasn.crypt.applet.EncryptApplet.class"
 					    archive="/owncloud/applet/cryptApp.jar,/owncloud/applet/bcprov-jdk15on-147.jar">
 				</object>
+			
 				<object 
-						width="80px"
+						width="120px"
 						height="20px"
 						type="application/x-java-applet"
 						id="decifApplet"
 						code="br.rnp.sasn.crypt.applet.DecryptApplet.class"
 						archive="/owncloud/applet/cryptApp.jar,/owncloud/applet/bcprov-jdk15on-147.jar">
 				</object>
+				
 			</div>
+
+<!-- ######################Cifrador - Fim -->
 			
 			<div id="upload" class="button"
 				 title="<?php p($l->t('Upload') . ' max. '.$_['uploadMaxHumanFilesize']) ?>">
@@ -53,6 +61,7 @@
 						   data-url="<?php print_unescaped(OCP\Util::linkTo('files', 'ajax/upload.php')); ?>" />
 					<a href="#" class="svg icon icon-upload"></a>
 			</div>
+			
 			
 			<?php if ($_['trash']): ?>
 			<input id="trash" type="button" value="<?php p($l->t('Deleted files'));?>" class="button" <?php $_['trashEmpty'] ? p('disabled') : '' ?> />

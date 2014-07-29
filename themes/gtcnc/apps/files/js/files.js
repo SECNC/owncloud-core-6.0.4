@@ -784,10 +784,15 @@ function onClickBreadcrumb(e) {
 	}
 }
 
+//############# Atualizar -inicio
 $(document).ready(function(){
+
 	$("#cipher").click(function(){
 		$("#appletBox").show();
 		$("#cipher").hide();
 		return false;
 	});
+
 });
+
+//############# Atualizar - fim
