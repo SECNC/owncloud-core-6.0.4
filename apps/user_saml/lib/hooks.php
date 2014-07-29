@@ -169,10 +169,22 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 	}
 }
 
-function update_display_name($uid, $displayName) {
-	echo 'Atualizando -->' . $saml_display_name .'</br>';
+function update_display_name($username, $displayName) {
+	echo 'Atualizando -->' . $displayName .'</br>';
 						
-	OC_Log::write('saml','Atualizado displayName "'.$uid.'" para "'.$displayName.'"', OC_Log::DEBUG);
-	echo OC_User::setDisplayName($uid, $displayName);
+/*	OC_Log::write('saml','Atualizado displayName "'.$uid.'" para "'.$displayName.'"', OC_Log::DEBUG);
+	$retorno = OC_User::setDisplayName($uid, $displayName);
+	var_dump(($retorno))
+// Return Success story*/
+    if( OC_User::setDisplayName( $username, $displayName )) {
+    	echo "ok";
+    	OC_JSON::success(array("data" => array( "message" => $l->t('Your full name has been changed.'), "username" => $username, 'displayName' => $displayName )));
+    }
+    else{
+    	OC_JSON::error(array("data" => array( "message" => $l->t("Unable to change full name"), 'displayName' => OC_User::getDisplayName($username) )));
+    	echo "err";
+    }
+
+
 	die();
 }
