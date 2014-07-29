@@ -7,7 +7,9 @@ require 'php-opencloud.php';
 use \OpenCloud\Rackspace;
 use \OpenCloud\ObjectStore\Constants\UrlType;
 
-// 1. Instantiate a Rackspace client.
+
+
+/*// 1. Instantiate a Rackspace client.
 $client = new Rackspace(Rackspace::US_IDENTITY_ENDPOINT, array(
     'username' => getenv('RAX_USERNAME'),
     'apiKey'   => getenv('RAX_API_KEY')
@@ -28,7 +30,7 @@ $object = $container->getObject($objectName);
 $iosStreamingUrl = $object->getPublicUrl(UrlType::IOS_STREAMING);
 
 printf("Object's publicly accessible iOS streaming URL: %s\n", $iosStreamingUrl);
-
+*/
 
 // Checa se o usuário está Logado
 OCP\User::checkLoggedIn();
