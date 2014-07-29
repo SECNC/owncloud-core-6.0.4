@@ -22,10 +22,12 @@
 	background-image: url('../img/loading-small.gif');
 }
 
+/** Cifrador - Novo icone **/
 .icon-cipher {
-	background-image: url('../img/actions/cipher.png');
-	background-repeat: no-repeat;
+	background-image: url('../img/actions/lock.png');
 }
+/** ----------------------- **/
+
 
 .icon-noise {
 	background-image: url('../img/noise.png');
