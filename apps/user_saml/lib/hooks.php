@@ -170,7 +170,6 @@ function update_groups($uid, $groups, $protectedGroups=array(), $just_created=fa
 
 function update_display_name($uid, $displayName) {
 	OCP\JSON::callCheck();
-	OC_JSON::checkLoggedIn();
 	OC_Log::write('saml','Atualizando DisplayName '.$uid,OC_Log::DEBUG);
 					echo $uid;
 					echo '</br>';
