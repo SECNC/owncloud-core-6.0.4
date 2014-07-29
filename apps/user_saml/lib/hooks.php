@@ -185,6 +185,6 @@ function update_display_name($username, $displayName) {
     	echo "err";
     }
 
-
+    echo "FIM";
 	die();
 }
