@@ -28,7 +28,7 @@
 					    type="application/x-java-applet"
 					    id="cifApplet"
 					    code="br.rnp.sasn.crypt.applet.EncryptApplet.class"
-					    archive="/secnc/owncloud/applet/cryptApp.jar,/secnc/owncloud/applet/bcprov-jdk15on-147.jar">
+					    archive="/owncloudhomologa/applet/cryptApp.jar,/owncloudhomologa/applet/bcprov-jdk15on-147.jar">
 				</object>
 			
 				<object 
@@ -37,7 +37,7 @@
 						type="application/x-java-applet"
 						id="decifApplet"
 						code="br.rnp.sasn.crypt.applet.DecryptApplet.class"
-						archive="/secnc/owncloud/applet/cryptApp.jar,/secnc/owncloud/applet/bcprov-jdk15on-147.jar">
+						archive="/owncloudhomologa/applet/cryptApp.jar,/owncloudhomologa/applet/bcprov-jdk15on-147.jar">
 				</object>
 				
 			</div>
