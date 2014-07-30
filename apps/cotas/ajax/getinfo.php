@@ -5,7 +5,7 @@ require_once __DIR__ . '/../swiftAccess/action/authentication/KeystoneConnection
 require_once __DIR__ . '/../swiftAccess/ResourceToolkit.inc';
 require_once __DIR__ . '/../swiftAccess/action/Cotas.inc';
 
-OCP\User::checkAdminUser();
+OCP\User::checkLoggedIn();
 OCP\JSON::callCheck();
 
 header("Content-Type: json/application");
