@@ -15,7 +15,8 @@ $tipo = $_POST['tipo'];
 $info = readData(false);
 
 if($tipo == 0){
-	$tenantaws = getTenantInfos($info['user'][$user][0]['options']['tenant'],$info['user'][$user][0]['options']['password_encrypted'],$info['user'][$user][0]['options']['user'],$info['user'][$user][0]['options']['url'] . '/tokens');
+	$key = array_keys($info['user'][$user]);
+	$tenantaws = getTenantInfos($info['user'][$user][$key[0]]['options']['tenant'],$info['user'][$user][$key[0]]['options']['password_encrypted'],$info['user'][$user][$key[0]]['options']['user'],$info['user'][$user][$key[0]]['options']['url'] . '/tokens');
 }
 else{
 	$tenantaws = getTenantInfos($info['group'][$user]['/$user/files/' . $tenant]['options']['tenant'],$info['group'][$user]['/$user/files/' . $tenant]['options']['password_encrypted'],$info['group'][$user]['/$user/files/' . $tenant]['options']['user'],$info['group'][$user]['/$user/files/' . $tenant]['options']['url'] . '/tokens');
