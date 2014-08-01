@@ -15,7 +15,7 @@
 			</div>
 			<?php endif;?>
 			
-<!-- ###################### Cifrador- Inicio -->
+<!-- ###################### Cifrador- Inicio 
 			
 			<div id="cipher" class="button">
 					<a href="#" class="svg icon icon-cipher"></a>
@@ -28,7 +28,7 @@
 					    type="application/x-java-applet"
 					    id="cifApplet"
 					    code="br.rnp.sasn.crypt.applet.EncryptApplet.class"
-					    archive="/owncloudhomologa/applet/cryptApp.jar,/owncloudhomologa/applet/bcprov-jdk15on-147.jar">
+					    archive="/owncloudhomologa/applet/.jar,/owncloudhomologa/applet/bcp:wq5on-147.jar">
 				</object>
 			
 				<object 
@@ -37,7 +37,7 @@
 						type="application/x-java-applet"
 						id="decifApplet"
 						code="br.rnp.sasn.crypt.applet.DecryptApplet.class"
-						archive="/owncloudhomologa/applet/cryptApp.jar,/owncloudhomologa/applet/bcprov-jdk15on-147.jar">
+						archive="/owncloudhomologa/applet/jar,/owncloudhomologa/applet/bcpk15on-147.jar">
 				</object>
 				
 			</div>
