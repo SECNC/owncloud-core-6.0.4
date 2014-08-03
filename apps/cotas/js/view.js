@@ -78,16 +78,20 @@ function ajax(){
                         }
 
 			
-			//alert(data.bytesUsed/data.bytesQuota *100 +"%");
 			//var porcentagem = data.objectsCount/data.objectsQuota *100,
-			var porcentagem = data.bytesUsed/data.bytesQuota *100;
-			
+			if(data.bytesQuota > 0){
+				var porcentagem = data.bytesUsed/data.bytesQuota *100;
+			}
+			else{
+				var porcentagem = 200;
+			}
+
 			if(porcentagem > 100){
 				p = $this.find(".progress-bar").width("100%");
 		
 			}
 			else if(porcentagem <0){
-						p = $this.find(".progress-bar").width(porcentagem +"0%");
+						p = $this.find(".progress-bar").width("0%");
 		
 			}else{
 				p = $this.find(".progress-bar").width(porcentagem +"%");
@@ -106,7 +110,6 @@ function ajax(){
 				p.css("background-color","#555");
 			}else {				
 				p.css("background-color","#f63a0f");
-		
 			}
 		
 		}

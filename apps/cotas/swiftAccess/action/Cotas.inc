@@ -24,7 +24,8 @@ set_include_path(
 		return $cipher;
 	}
 
-function getTenantInfos($user,$passwd,$nometenant,$endereco){
+function getTenantInfos($user,$passwd,$nometenant,$endereco,$bucket){
+	//echo $user.' - '. $passwd .' - '. $nometenant .' - '. $endereco . $bucket;
 	$passwd =  decryptPassword($passwd);
 	$cc = new ConnectionContext();
 	$connection = new KeystoneConnection();
@@ -54,7 +55,7 @@ function getTenantInfos($user,$passwd,$nometenant,$endereco){
 		$httpConnection = new HttpConnection();
 		$httpConnection->addHttpMethodRequest("GET");
 		$httpConnection->addNewHeader("X-Auth-Token", $cc->getToken());
-		$response = $httpConnection->getResponse($cc->getStorageURL() . '/' . $user);//'$swiftURL);
+		$response = $httpConnection->getResponse($cc->getStorageURL() . '/' . $bucket);//'$swiftURL);
 		
 		$headers = $httpConnection->getResponseHeaders('X-Container-Meta-Quota-Bytes');
 		
