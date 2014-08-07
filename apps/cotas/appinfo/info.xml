@@ -1,8 +1,8 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <info>
 	<id>cotas</id>
 	<name>Cotas</name>
-	<description>App para visualização de cotas de usuários associados ao openstack swift com o Files External</description>
+	<description>App para 2visualização de cotas de usuários associados ao openstack swift com o Files External</description>
 	<version>1.0</version>
 	<licence>AGPL</licence>
 	<author>André Luís Castro de Felippe - GT-CNC</author>
