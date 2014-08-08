@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+	<id>gerencia_cotas</id>
+	<name>Gerencia Cotas</name>
+	<description>App que defini uma cota para todos os containers de uma conta.</description>
+	<version>1.0</version>
+	<licence>AGPL</licence>
+	<author>André Neto</author>
+	<require>4</require>
+</info>
