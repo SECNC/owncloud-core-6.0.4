@@ -1,15 +1,16 @@
-<?php
+﻿<?php
 /* André Avelino da Silva Neto 06-08-2014 */
 
 require 'vendor/autoload.php';
 use OpenCloud\OpenStack;
 use OpenCloud\Common\Constants\Size;
 
+OC_Util::checkAdminUser();
 
-$client = new OpenStack('http://192.168.1.80:5000/v2.0', array(
-    'username'   => 'swift',
-    'password'   => 'gtcnc',
-    'tenantName' => 'service'
+$client = new OpenStack('https://200.129.132.69:5000/v2.0', array(
+    'username'   => 'owncloud',
+    'password'   => 'own123cloudSenha',
+    'tenantName' => 'cnc'
 ));
 
 $region = 'regionOne';
@@ -18,13 +19,16 @@ $objectStoreService = $client->objectStoreService('swift', $region);
 $novacota = $_POST["cota"];
 $size = $_POST["size"];
 
-session_start();
+/*session_start();
 	foreach ($_SESSION['user'] as $uid){
 		if (isset ($_POST["$uid"])){
 			$user = $uid;
 		}
 	}
 session_write_close();
+*/
+
+$user = $_POST["uid"];
 
 if (strcmp($size,"MB") == 0){
 	$cotacontainer = $novacota * Size::MB;

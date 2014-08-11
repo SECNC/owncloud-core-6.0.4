@@ -12,13 +12,23 @@ if ($_['result'] == 1): ?>
 
 <?php 
 	$i = 0; 
-	foreach ($_['users'] as $uid){
-		similar_text(strtolower($_['user']), strtolower($uid), $percent);
-		if ($percent > 30){ 
-			$similar[$i] = $uid; 
-			$i++; 
+
+	if(strtolower($_['user']) == ''){
+		foreach ($_['users'] as $uid){
+				$similar[$i] = $uid; 
+				$i++; 
 		} 
-	} 
+
+	}
+	else{
+		foreach ($_['users'] as $uid){
+			similar_text(strtolower($_['user']), strtolower($uid), $percent);
+			if ($percent > 30){ 
+				$similar[$i] = $uid; 
+				$i++; 
+			} 
+		} 
+	}
 ?> 
 
 <?php endif; ?>
@@ -35,8 +45,6 @@ Nova cota definida!
 
 <?php if ($vazio != 1): ?>
 
-<?php session_start(); $_SESSION['user']=$similar; session_write_close(); ?>
-
 <br></br>
   <table width="100%">
 	<tr> 
@@ -49,9 +57,19 @@ Nova cota definida!
 
 	<tr>
 		<td><?php print($id); ?></td>  
+
+		<?php if($usercota["$id"] == -1) { ?>
+		<td>Container com nome de usuário não foi encontrado</td> 
+		<td></td>
+	
+		<?php } else { ?>
+		
 		<td><?php print($usercota["$id"]/(1024*1024)); echo " MB"; ?></td> 
-		<td><form action = "definer.php" method="POST"><input type="text" name="cota" maxlength = "4" style="width:42px;"></input><select name="size"><option value= "MB">MB</option><option value= "GB">GB</option> </select> <input type="submit" value="Definir" name="<?php print($id); ?>"></input></form></td>
-	</tr>
+		<td><form action = "definer.php" method="POST"><input type="text" name="cota" maxlength = "4" style="width:42px;"></input><select name="size"><option value= "MB">MB</option><option value= "GB">GB</option> </select> <input type="hidden" name="uid" value="<?php print($id); ?>" /> <input type="submit" value="Definir" name="<?php print($id); ?>"></input></form></td>
+	
+
+		<?php } ?>
+		</tr>
 
 <?php endforeach; ?>
 </table>
