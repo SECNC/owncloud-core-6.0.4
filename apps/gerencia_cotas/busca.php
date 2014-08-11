@@ -1,7 +1,7 @@
 ﻿<?php
 /* André Avelino da Silva Neto 06-08-2014 
 <a href="busca.php?user=<?php print($id); ?>">*/
-require 'vendor/autoload.php';
+require '3rdparty/autoload.php';
 use OpenCloud\OpenStack;
 use OpenCloud\Common\Constants\Size;
 
