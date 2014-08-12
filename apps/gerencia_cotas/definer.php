@@ -1,7 +1,12 @@
 ﻿<?php
 /* André Avelino da Silva Neto 06-08-2014 */
 
-require '3rdparty/autoload.php';
+//Checar se usuário é adm
+set_include_path(get_include_path() . PATH_SEPARATOR .
+        \OC_App::getAppPath('gerencia_cotas') . '/3rdparty');
+
+require 'php-opencloud.php';
+
 use OpenCloud\OpenStack;
 use OpenCloud\Common\Constants\Size;
 
