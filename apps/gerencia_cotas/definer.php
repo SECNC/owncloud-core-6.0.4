@@ -12,10 +12,10 @@ use OpenCloud\Common\Constants\Size;
 
 OC_Util::checkAdminUser();
 
-$client = new OpenStack('https://200.129.132.69:5000/v2.0', array(
-    'username'   => 'owncloud',
-    'password'   => 'own123cloudSenha',
-    'tenantName' => 'cnc'
+$client = new OpenStack(OC_Config::getValue( "gtauth", 'http://endereco.com.br'), array(
+    'username'   => OC_Config::getValue( "gtuser", 'usuario') ,
+    'password'   => OC_Config::getValue( "gtsenha", 'senha'),
+    'tenantName' => OC_Config::getValue( "gttenant", 'tenant')
 ));
 
 $region = 'regionOne';
