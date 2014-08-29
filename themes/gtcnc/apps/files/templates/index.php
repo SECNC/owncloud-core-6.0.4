@@ -15,7 +15,7 @@
 			</div>
 			<?php endif;?>
 			
-<!-- ###################### Cifrador- Inicio 
+<!-- ###################### Cifrador- Inicio -->
 			
 			<div id="cipher" class="button">
 					<a href="#" class="svg icon icon-cipher"></a>
