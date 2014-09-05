@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+	<id>gerenciamento</id>
+	<name>Gerencia contas</name>
+	<description>Gerenciamento das contas e usuários da nuvem.</description>
+	<version>1.0</version>
+	<licence>AGPL</licence>
+	<author>André Neto</author>
+	<require>4</require>
+</info>
