@@ -335,8 +335,11 @@ if (isset($_POST['action']) && isset($_POST['itemType']) && isset($_POST['itemSo
 							|| !is_array($_GET['itemShares'][OCP\Share::SHARE_TYPE_USER])
 							|| !in_array($uid, $_GET['itemShares'][OCP\Share::SHARE_TYPE_USER]))
 							&& $uid != OC_User::getUser()) {
+
+							$email=OC_Preferences::getValue($uid, 'settings', 'email', '');
+
 							$shareWith[] = array(
-								'label' => $displayName,
+								'label' => $displayName . ' (' . $email . ')',
 								'value' => array(
 									'shareType' => OCP\Share::SHARE_TYPE_USER,
 									'shareWith' => $uid)
