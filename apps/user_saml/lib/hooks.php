@@ -57,10 +57,18 @@ class OC_USER_SAML_Hooks {
 				$saml_display_name = '';
 				foreach ($samlBackend->displayNameMapping as $displayNameMapping) {
 					if (array_key_exists($displayNameMapping, $attributes) && !empty($attributes[$displayNameMapping][0])) {
-						$saml_display_name = $attributes[$displayNameMapping][0] . ' '. $attributes[$displayNameMapping2][0];
+						$saml_display_name = $attributes[$displayNameMapping][0];
 						break;
 					}
 				}
+
+				foreach ($samlBackend->displayNameMapping2 as $displayNameMapping2) {
+					if (array_key_exists($displayNameMapping2, $attributes) && !empty($attributes[$displayNameMapping2][0])) {
+						$saml_display_name = $saml_display_name . ' - ' . $attributes[$displayNameMapping2][0];
+						break;
+					}
+				}
+
 
 				$saml_groups = array();
 				foreach ($samlBackend->groupMapping as $groupMapping) {
