@@ -28,8 +28,12 @@ OCP\Util::addStyle('files_external', 'settings');
 OCP\Util::addStyle('3rdparty', 'chosen/chosen');
 $tmpl = new OCP\Template('files_external', 'settings');
 $tmpl->assign('isAdminPage', true);
-//$tmpl->assign('mounts', OC_Mount_Config::getSystemMountPoints());
 
+if(OC_Config::getValue( "exibeMounAdmin", false)){
+
+	$tmpl->assign('mounts', OC_Mount_Config::getSystemMountPoints());
+
+}
 $tmpl->assign('backends', OC_Mount_Config::getBackends());
 $tmpl->assign('groups', OC_Group::getGroups());
 $tmpl->assign('users', OCP\User::getUsers());

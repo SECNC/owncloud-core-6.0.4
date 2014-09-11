@@ -18,10 +18,13 @@ OC::$CLASSPATH['OC\Files\Storage\SFTP'] = 'files_external/lib/sftp.php';
 OC::$CLASSPATH['OC\Files\Storage\iRODS'] = 'files_external/lib/irods.php';
 OC::$CLASSPATH['OC_Mount_Config'] = 'files_external/lib/config.php';
 
-/*OCP\App::registerAdmin('files_external', 'settings');
-if (OCP\Config::getAppValue('files_external', 'allow_user_mounting', 'yes') == 'yes') {
-	OCP\App::registerPersonal('files_external', 'personal');
-}*/
+if(OC_Config::getValue( "exibeMounAdmin", false)){
+
+	OCP\App::registerAdmin('files_external', 'settings');
+	if (OCP\Config::getAppValue('files_external', 'allow_user_mounting', 'yes') == 'yes') {
+		OCP\App::registerPersonal('files_external', 'personal');
+	}
+}
 
 // connecting hooks
 OCP\Util::connectHook('OC_Filesystem', 'post_initMountPoints', '\OC_Mount_Config', 'initMountPointsHook');
