@@ -57,7 +57,7 @@ class OC_USER_SAML_Hooks {
 				$saml_display_name = '';
 				foreach ($samlBackend->displayNameMapping as $displayNameMapping) {
 					if (array_key_exists($displayNameMapping, $attributes) && !empty($attributes[$displayNameMapping][0])) {
-						$saml_display_name = $attributes[$displayNameMapping][0];
+						$saml_display_name = $attributes[$displayNameMapping][0] . '12323';
 						break;
 					}
 				}
