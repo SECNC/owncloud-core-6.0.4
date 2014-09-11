@@ -48,7 +48,9 @@ class OC_USER_SAML extends OC_User_Backend {
 		$this->protectedGroups = explode (',', preg_replace('/\s+/', '', OCP\Config::getAppValue('user_saml', 'saml_protected_groups', '')));
 		$this->usernameMapping = explode (',', preg_replace('/\s+/', '', OCP\Config::getAppValue('user_saml', 'saml_username_mapping', '')));
 		$this->mailMapping = explode (',', preg_replace('/\s+/', '', OCP\Config::getAppValue('user_saml', 'saml_email_mapping', '')));
-		$this->displayNameMapping = explode (',', preg_replace('/\s+/', '', OCP\Config::getAppValue('user_saml', 'saml_displayname_mapping', '')));
+		$this->displayNameMapping = explode (',', preg_replace('/\s+/', '', OCP\Config::getAppValue('user_saml', 'saml_displayname_mapping')));
+		$this->displayNameMapping2 = explode (',', preg_replace('/\s+/', '', OCP\Config::getAppValue('user_saml', 'saml_displayname_mapping_2')));
+
 		$this->groupMapping = explode (',', preg_replace('/\s+/', '', OCP\Config::getAppValue('user_saml', 'saml_group_mapping', '')));
 
 		if (!empty($this->sspPath) && !empty($this->spSource)) {
