@@ -4,6 +4,12 @@ set_include_path(
 	\OC_App::getAppPath('files_external') . '/3rdparty/phpseclib/phpseclib'
 );
 
+	function encryptPassword($password) {
+		$cipher = getCipher();
+		$iv = \OCP\Util::generateRandomBytes(16);
+		$cipher->setIV($iv);
+		return base64_encode($iv . $cipher->encrypt($password));
+	}
 	function decryptPassword($encryptedPassword) {
 		
 		$cipher = getCipher();
@@ -25,6 +31,8 @@ set_include_path(
 	}
 
 function getTenantInfos($user,$passwd,$nometenant,$endereco,$bucket){
+	echo encryptPassword("123owncloudSenha");
+	die();
 	//echo $user.' - '. $passwd .' - '. $nometenant .' - '. $endereco . $bucket;
 	$passwd =  decryptPassword($passwd);
 	$cc = new ConnectionContext();
