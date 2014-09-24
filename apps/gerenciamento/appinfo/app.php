@@ -15,7 +15,7 @@ if (OC_User::isAdminUser(OC_User::getUser())){
 
 	if (OC_Group::inGroup(OC_User::getUser(), 'inst_admin')){
 		OCP\App::addNavigationEntry( array( 
-				'id' => 'gerenciamento',
+			'id' => 'gerenciamento',
 			'order' => 100,
 			'href' => OCP\Util::linkTo('gerenciamento', 'inst.php'),
 			'icon' => OCP\Util::imagePath('gerenciamento', 'rename.svg'),
