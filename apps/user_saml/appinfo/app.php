@@ -64,7 +64,7 @@ if (OCP\App::isEnabled('user_saml')) {
 		}
 
 		OC::$REQUESTEDAPP = '';
-		OC_Util::redirectToDefaultPage();
+//		OC_Util::redirectToDefaultPage();
 	}
 
 	if (!OCP\User::isLoggedIn()) {
