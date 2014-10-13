@@ -82,6 +82,12 @@ class OC_USER_SAML_Hooks {
 				}
 
 				if (!OC_User::userExists($uid)) {
+						header('Status: 301 Moved Permanently', false, 301);    
+						header('Localização: http://www.google.com.br');    
+						exit();   
+						echo 'eu tentei';
+						die();
+
 					/*if (preg_match( '/[^a-zA-Z0-9 _\.@\-]/', $uid)) {
 						OC_Log::write('saml','Invalid username "'.$uid.'", allowed chars "a-zA-Z0-9" and "_.@-" ',OC_Log::DEBUG);
 						return false;
@@ -120,13 +126,6 @@ class OC_USER_SAML_Hooks {
 					}
 				}
 				return true;
-			}
-			else{
-				header('Status: 301 Moved Permanently', false, 301);    
-				header('Localização: http://www.google.com.br');    
-				exit();   
-				die();
-
 			}
 		}
 		return false;
