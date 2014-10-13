@@ -121,6 +121,12 @@ class OC_USER_SAML_Hooks {
 				}
 				return true;
 			}
+			else{
+				header('Status: 301 Moved Permanently', false, 301);    
+				header('Localização: http://www.google.com.br');    
+				exit();   
+
+			}
 		}
 		return false;
 	}
