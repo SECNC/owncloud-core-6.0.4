@@ -72,7 +72,7 @@ if (OCP\App::isEnabled('user_saml')) {
 
 			echo '12 logado';
 		}
-		OC_Util::redirectToDefaultPage();
+	//	OC_Util::redirectToDefaultPage();
 	}
 
 	if (!OCP\User::isLoggedIn()) {
