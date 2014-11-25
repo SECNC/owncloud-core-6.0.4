@@ -64,15 +64,7 @@ if (OCP\App::isEnabled('user_saml')) {
 		}
 
 		OC::$REQUESTEDAPP = '';
-
-		if (!OCP\User::isLoggedIn()) {
-				echo 'logado';
-		}
-		else{
-
-			echo '12 logado';
-		}
-	//	OC_Util::redirectToDefaultPage();
+		OC_Util::redirectToDefaultPage();
 	}
 
 	if (!OCP\User::isLoggedIn()) {
