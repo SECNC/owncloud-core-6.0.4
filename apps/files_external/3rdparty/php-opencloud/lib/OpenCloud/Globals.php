@@ -114,7 +114,7 @@ if (!defined('RAXSDK_DNS_ASYNC_INTERVAL'))
 	define('RAXSDK_DNS_ASYNC_INTERVAL', 1);
 if (!defined('RAXSDK_CONNECTTIMEOUT'))
     define('RAXSDK_CONNECTTIMEOUT', 5);
-    define('RAXSDK_TIMEOUT', 200);
+    define('RAXSDK_TIMEOUT', 240);
 if (!defined('RAXSDK_SERVER_MAXTIMEOUT'))
     define('RAXSDK_SERVER_MAXTIMEOUT', 3600);
 if (!defined('RAXSDK_POLL_INTERVAL'))
