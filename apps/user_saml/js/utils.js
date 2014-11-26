@@ -9,12 +9,33 @@ $(document).ready(function(){
 
 	var loginMsg = t('user_saml', 'Login com Federação');
 
-    $('<div id="login-saml"></div>').css({
-		'text-align': 'center',
+    $('<div id="login-saml" style="display: inline"></div>').css({
+		'text-align': 'rigth',
     }).appendTo('form');
 
-	$('<p>Ou</p>').css(
+    $('.wrapper').css({
+    'width': '600px'
+
+    })
+
+    $('form').css({
+    'width': 'inherit'
+
+    })
+
+    $('fieldset').css({
+        'width': '100px' ,
+        'display': 'none',
+    'float': 'left',
+
+    })
+
+       $('head').append('<style type="text/css"> login{float: left; position: relative;} .push{float: left; position: relative;} a:link, a:visited { text-decoration: none    } a:hover {  text-decoration: none;     color: #ccc    }    a:active {    text-decoration: none    }</style>');
+
+	$('<p>Selecione sua forma de acesso:</p></br>').css(
 	{
+        
+
 		'text-align': 'center',
         'font-weight': 'bolder',
         'font-size' : '110%'
@@ -42,17 +63,30 @@ $(document).ready(function(){
         }
     });
 
-	$('<p>acesse pela federação:</p>').css(
+	$('<a id="login-saml-action" href="?app=user_saml" ><div id="jatenho"><p>Já tenho uma conta</p></div></a>').css(
 	{
 		'text-align': 'center',
         'font-weight': 'bolder',
-        'font-size' : '110%'
+        'font-size' : '110%',
+        'display' : 'inline',
+        'float' : 'left',
+        'width': '50%'
 	}).appendTo('#login-saml');
 
 
-    $('<a id="login-saml-action" href="?app=user_saml" ></a>').css(
+    //$('<a id="login-saml-action" href="?app=user_saml" ></a>').css(
+    //{
+     //   'text-decoration': 'none'
+    //}).appendTo('#jatenho');
+
+
+  $('<a id="login-saml-action" href="/usuarios" ><div id="naotenho"><p>É o meu primeiro acesso</p></div></a>').css(
     {
-        'text-decoration': 'none'
+        'text-align': 'center',
+        'font-weight': 'bolder',
+        'font-size' : '110%',
+        'display' : 'inline',
+        'width': '50%'
     }).appendTo('#login-saml');
 
 
@@ -60,7 +94,27 @@ $(document).ready(function(){
 	{
 		cursor : 'pointer',
         border : '1px solid #777'
-	}).appendTo('#login-saml-action');
+	}).appendTo('#jatenho');
+
+
+
+
+  
+
+   // $('<a id="login-saml-action" href="?app=user_saml" ></a>').css(
+  //  {
+ //       'text-decoration': 'none'
+//    }).appendTo('#login-saml');
+
+
+    $('<img id="login-saml-img" src="' + OC.imagePath('user_saml', 'primeiro.png') + '" title="Primeira vez que aceso o serviço" alt="'+ loginMsg +'" />').css(
+    {
+        cursor : 'pointer',
+        border : '1px solid #777'
+    }).appendTo('#naotenho');
+
+
+
 
 
 });
