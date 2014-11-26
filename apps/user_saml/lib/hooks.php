@@ -128,7 +128,6 @@ class OC_USER_SAML_Hooks {
 
 
 	static public function logout($parameters) {
-		return true;
 		$samlBackend = new OC_USER_SAML();
 		if ($samlBackend->auth->isAuthenticated()) {
 			OC_Log::write('saml', 'Executing SAML logout', OC_Log::DEBUG);
