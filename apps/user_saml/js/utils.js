@@ -80,7 +80,7 @@ $(document).ready(function(){
     //}).appendTo('#jatenho');
 
 
-  $('<a id="login-saml-action" href="/usuarios" ><div id="naotenho"><p>É o meu primeiro acesso</p></div></a>').css(
+  $('<a id="login-saml-action" href="/usuarios/solicitacao" ><div id="naotenho"><p>É o meu primeiro acesso</p></div></a>').css(
     {
         'text-align': 'center',
         'font-weight': 'bolder',
