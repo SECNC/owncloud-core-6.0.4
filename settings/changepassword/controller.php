@@ -4,6 +4,7 @@ namespace OC\Settings\ChangePassword;
 
 class Controller {
 	public static function changePersonalPassword($args) {
+		
 		// Check if we are an user
 		\OC_JSON::callCheck();
 		\OC_JSON::checkLoggedIn();
@@ -15,10 +16,14 @@ class Controller {
 		$password = isset($_POST['personal-password']) ? $_POST['personal-password'] : null;
 		$oldPassword = isset($_POST['oldpassword']) ? $_POST['oldpassword'] : '';
 
-		if (!\OC_User::checkPassword($username, $oldPassword)) {
-			$l = new \OC_L10n('settings');
-			\OC_JSON::error(array("data" => array("message" => $l->t("Wrong password")) ));
-			exit();
+	//	if (!\OC_User::checkPassword($username, $oldPassword)) {
+//			$l = new \OC_L10n('settings');
+//			\OC_JSON::error(array("data" => array("message" => $l->t("Wrong password")) ));
+//			exit();
+//		}
+		if(strcasecmp($password, $oldPassword) != 0){
+			\OC_JSON::error();		
+			exit();	
 		}
 		if (!is_null($password) && \OC_User::setPassword($username, $password)) {
 			\OC_JSON::success();

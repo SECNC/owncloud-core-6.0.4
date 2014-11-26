@@ -2,33 +2,39 @@
  * Copyright (c) 2011, Robin Appelman <icewind1991@gmail.com>
  * This file is licensed under the Affero General Public License version 3 or later.
  * See the COPYING-README file.
- */?>
+
+ */
+ use OCP\User as user;
+?>
 
 <?php
 if($_['displayNameChangeSupported']) {
 ?>
 <form id="displaynameform">
-	<fieldset class="personalblock">
-		<h2><?php echo $l->t('Full Name');?></h2>
-		<em><?php p($_['displayName'])?></em>
-	</fieldset>
+
 </form>
 <?php
 }
 ?>
 
-<?php
-if($_['passwordChangeSupported']) {
-?>
-<form id="lostpassword">
-	<fieldset class="personalblock">
-		<h2><?php p($l->t('Email'));?></h2>
-		<em><?php p($_['email']); ?></em>
-	</fieldset>
+<form id="passwordform" class="section">
+	<h2>Cliente de sincronização</h2>
+	<div id="passwordchanged">Senha alterada com sucesso</div>
+	<div id="passworderror">Erro ao alterar senha, senha e confirmação de senha devem ser iguais! </div>
+		</br>Usuário: <Strong><em><?php echo user::getUser()?></em></Strong></br>
+		Senha:
+	<input type="password" id="pass1" name="oldpassword"
+		placeholder="<?php echo 'Senha'; ?>"
+		autocomplete="off" autocapitalize="off" autocorrect="off" />
+	<input type="password" id="pass2" name="personal-password"
+		placeholder="<?php echo 'Confirmação'?>"
+		data-typetoggle="#personal-show"
+		autocomplete="off" autocapitalize="off" autocorrect="off" />
+	<input type="checkbox" id="personal-show" name="show" /><label for="personal-show"></label>
+	<input id="passwordbutton" type="submit" value="<?php echo $l->t('Change password');?>" />
+	<br/>
+	<div class="strengthify-wrapper"></div>
 </form>
-<?php
-}
-?>
 
 <form>
 	<fieldset class="personalblock">
